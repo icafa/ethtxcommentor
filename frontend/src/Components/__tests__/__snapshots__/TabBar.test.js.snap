@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TabBarTest renders correctly 1`] = `
+<DocumentFragment>
+  <div>
+    <nav>
+      <ul
+        class="TabBar__Bar-sc-1rsszd9-0 euTWlF"
+      >
+        <li
+          class="TabBar__Tab-sc-1rsszd9-2 kFRThM"
+          tabindex="0"
+        >
+          <span
+            class="TabBar__Label-sc-1rsszd9-3 gqxJuy"
+          >
+            Blocks
+          </span>
+        </li>
+        <li
+          class="TabBar__Tab-sc-1rsszd9-2 jPNMsb"
+          tabindex="0"
+        >
+          <span
+            class="TabBar__Label-sc-1rsszd9-3 ggJopK"
+          >
+            Transactions
+          </span>
+        </li>
+      </ul>
+    </nav>
+    <div
+      class="ToastHub__Container-sc-1y0i8xl-0 stXpK"
+    />
+  </div>
+</DocumentFragment>
+`;

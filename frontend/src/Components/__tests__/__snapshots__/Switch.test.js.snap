@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Switch component renders correctly with off state 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-cHGsZl bFXplU"
+  >
+    <input
+      class="offscreen"
+      id="toggle"
+      name="toggle"
+      type="checkbox"
+    />
+     
+    <label
+      class="switch"
+      for="toggle"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Switch component renders correctly with on state 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-cHGsZl bFXplU"
+  >
+    <input
+      checked=""
+      class="offscreen"
+      id="toggle"
+      name="toggle"
+      type="checkbox"
+    />
+     
+    <label
+      class="switch"
+      for="toggle"
+    />
+  </div>
+</DocumentFragment>
+`;

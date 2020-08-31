@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GenericError Component Tests matches the snapshot 1`] = `
+<DocumentFragment>
+  <div>
+    <div
+      class="sc-cHGsZl enfjgR"
+    >
+      <div
+        class="Card__StyledCard-sc-13r75gj-0 EmptyStateCard__Main-ov2yly-0 dwLKdW"
+      >
+        <section>
+          <svg
+            height="22"
+            viewBox="0 0 22 22"
+            width="22"
+          >
+            <g
+              fill="none"
+              fill-rule="evenodd"
+              transform="translate(4 4)"
+            >
+              <rect
+                fill="#FF445D"
+                height="14"
+                rx="7"
+                width="14"
+              />
+              <path
+                d="M6.155 8.547h1.298V3.3H6.155v5.247zM6.045 11h1.529V9.537H6.045V11z"
+                fill="#FFF"
+              />
+            </g>
+          </svg>
+          <h1
+            class="EmptyStateCard__Heading-ov2yly-2 dmyaZr"
+          >
+            <span
+              class="Text-yxw4o9-0 hUTBun"
+              color="#00CBE6"
+            >
+              An unexpected error has ocurred
+            </span>
+          </h1>
+          <div
+            class="Text-yxw4o9-0 hrwmLl"
+          >
+            We're sorry for the inconvenience.
+          </div>
+          <div
+            class="EmptyStateCard__ActionWrapper-ov2yly-3 cWXFuk"
+          >
+            <button
+              class="Button__StyledButton-sc-8npd5h-0 VDYDq EmptyStateCard__DefaultActionButton-ov2yly-1 PmJbu"
+              mode="strong"
+              type="button"
+            >
+              Report Error
+            </button>
+          </div>
+        </section>
+      </div>
+    </div>
+    <div
+      class="ToastHub__Container-sc-1y0i8xl-0 stXpK"
+    />
+  </div>
+</DocumentFragment>
+`;

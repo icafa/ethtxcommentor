@@ -1,0 +1,131 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PaginationTable Component renders correctly with items 1`] = `
+<DocumentFragment>
+  <div>
+    <div
+      class="sc-cHGsZl OpiEb"
+    >
+      <span
+        class="Text-yxw4o9-0 Hwozf"
+        data-testid="pagination-text"
+      >
+        1 - 2 out of 2
+      </span>
+      <div>
+        <button
+          class="Button__StyledButton-sc-8npd5h-0 hTPQnb"
+          data-testid="start-button"
+          disabled=""
+          type="button"
+        >
+          <u>
+            &lt;
+          </u>
+        </button>
+        <button
+          class="Button__StyledButton-sc-8npd5h-0 hTPQnb"
+          data-testid="back-button"
+          disabled=""
+          type="button"
+        >
+          &lt;
+        </button>
+        <button
+          class="Button__StyledButton-sc-8npd5h-0 hTPQnb"
+          data-testid="next-button"
+          disabled=""
+          type="button"
+        >
+          &gt;
+        </button>
+        <button
+          class="Button__StyledButton-sc-8npd5h-0 hTPQnb"
+          data-testid="end-button"
+          disabled=""
+          type="button"
+        >
+          <u>
+             &gt;
+          </u>
+        </button>
+      </div>
+    </div>
+    <table
+      class="Table__StyledTable-uvcan9-0 cRowBj"
+    >
+      <thead>
+        <tr
+          class="TableRow__StyledTableRow-sc-3jn6yz-0 cFtmyC"
+        >
+          <th
+            class="TableHeader__StyledTableHeader-sc-1qxm8cp-0 hKOaZg"
+          >
+            <div
+              class="Text-yxw4o9-0 bBnSPr"
+              color="#707070"
+            />
+          </th>
+          <th
+            class="TableHeader__StyledTableHeader-sc-1qxm8cp-0 hKOaZg"
+          >
+            <div
+              class="Text-yxw4o9-0 bBnSPr"
+              color="#707070"
+            />
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          class="TableRow__StyledTableRow-sc-3jn6yz-0 cFtmyC"
+        >
+          <td
+            class="TableCell__StyledTableCell-sc-110j155-0 hqZwhV"
+          >
+            <div
+              class="TableCell__StyledTableCellContent-sc-110j155-1 klobR"
+            >
+              Guitar
+            </div>
+          </td>
+          <td
+            class="TableCell__StyledTableCell-sc-110j155-0 hqZwhV"
+          >
+            <div
+              class="TableCell__StyledTableCellContent-sc-110j155-1 klobR"
+            >
+              6
+            </div>
+          </td>
+        </tr>
+        <tr
+          class="TableRow__StyledTableRow-sc-3jn6yz-0 cFtmyC"
+        >
+          <td
+            class="TableCell__StyledTableCell-sc-110j155-0 hqZwhV"
+          >
+            <div
+              class="TableCell__StyledTableCellContent-sc-110j155-1 klobR"
+            >
+              Bass
+            </div>
+          </td>
+          <td
+            class="TableCell__StyledTableCell-sc-110j155-0 hqZwhV"
+          >
+            <div
+              class="TableCell__StyledTableCellContent-sc-110j155-1 klobR"
+            >
+              4
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div
+      class="ToastHub__Container-sc-1y0i8xl-0 stXpK"
+    />
+  </div>
+</DocumentFragment>
+`;
