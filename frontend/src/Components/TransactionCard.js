@@ -36,7 +36,7 @@ const CardContent = styled.div`
 const TransactionCard = ({ transactInfo }) => (
   <Card
     height="auto"
-    width="300px"
+    width="500px"
     css={`
       margin: 0 auto;
     `}

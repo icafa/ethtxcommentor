@@ -5,6 +5,7 @@ import { IconError, EmptyStateCard } from '@aragon/ui'
 import Web3 from 'web3'
 import Spinner, { SpinnerWrapper } from '../Components/Spinner'
 import TransactionCard from '../Components/TransactionCard'
+import CommentsCard from '../Components/CommentsCard'
 import { getInjectedProvider } from '../utils/web3-utils'
 
 const TransactionInfo = () => {
@@ -59,6 +60,7 @@ const TransactionInfo = () => {
     return (
       <animated.div style={{ animationProps, width: '95%' }} key={2}>
         <TransactionCard transactInfo={transactInfo} />
+        <CommentsCard transactInfo={transactInfo} />
       </animated.div>
     )
   }
