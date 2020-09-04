@@ -14,7 +14,7 @@ import {
 
 import TransactionPNG from '../assets/transaction@3x.png'
 import { GU, toEther } from '../utils/utils'
-import history from '../history'
+import { history } from '../store'
 
 const CardContent = styled.div`
   display: flex;

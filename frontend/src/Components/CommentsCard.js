@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
+import { getComments, addComments } from '../actions/comments.actions'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { useForm } from 'react-hook-form'
@@ -31,30 +33,26 @@ const CardContent = styled.div`
 `
 
 
-const CommentsCard = ({ transactInfo }) => {
+const CommentsCard = ({ transactInfo, commentsByHash, getComments, addComments }) => {
   const { register, handleSubmit, errors, setValue} = useForm()
-  const initialComments = [
-    {
-      avatar: TransactionPNG,
-      username: "Dev2",
-      text: "It's too expensive"
-    },
-    {
-      avatar: TransactionPNG,
-      username: "Dev1",
-      text: "0.1 ether is $43.47 ?"
+
+  let txHash = transactInfo.hash
+  let comments = commentsByHash[txHash] || []
+
+  useEffect(() => {
+    if(!comments) {
+      getComments(transactInfo.hash)
     }
-  ]
-  const [comments, setComments] = useState(initialComments)
+  })
 
   const onSubmit = (data) => {
     console.log(data)
-    const newComments = [{
+    addComments({
       ...data,
       username: "Dev3",
-      avatar: TransactionPNG
-    }].concat(comments)
-    setComments(newComments)
+      avatar: TransactionPNG,
+      hash: txHash,
+    })
     setValue("text", "")
   };
 
@@ -77,11 +75,11 @@ const CommentsCard = ({ transactInfo }) => {
         <input name="text" ref={register} /> {/* register an input */}
         <input type="submit" />
       </form>
-      <div className="block-stats">
+      <div>
       {
-        comments.map(comment => {
+        comments.map((comment, index) => {
           return (
-            <>
+            <div key={index} className="block-stats">
               <div className="stat">
                 <img
                   src={comment.avatar}
@@ -96,7 +94,7 @@ const CommentsCard = ({ transactInfo }) => {
               <div className="stat">
                 <Badge>{comment.text}</Badge>
               </div>
-            </>
+            </div>
           )
         })
       }
@@ -120,4 +118,16 @@ CommentsCard.propTypes = {
   }),
 }
 
-export default CommentsCard
+const mapStateToProps = state => ({
+  commentsByHash: state.commentsReducer.commentsByHash
+})
+
+const mapDispatchToProps = dispatch => ({
+  getComments: (payload) => dispatch(getComments(payload)),
+  addComments: (payload) => dispatch(addComments(payload))
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CommentsCard)

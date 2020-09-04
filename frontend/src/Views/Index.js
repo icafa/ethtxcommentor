@@ -18,7 +18,7 @@ import Switch from '../Components/Switch'
 import Spinner, { SpinnerWrapper } from '../Components/Spinner'
 import { GU } from '../utils/utils'
 import { getInjectedProvider, fetchBlocks } from '../utils/web3-utils'
-import history from '../history'
+import { history } from '../store'
 
 const Wrapper = styled.div`
   position: relative;

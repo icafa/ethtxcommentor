@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import 'styled-components/macro'
 import { Card, Button, Text, Badge, theme } from '@aragon/ui'
 import BlockPNG from '../assets/block@3x.png'
-import history from '../history'
+import { history } from '../store'
 import { GU } from '../utils/utils'
 
 const CardContent = styled.div`

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { TabBar } from '@aragon/ui'
-import history from '../history'
+import { history } from '../store'
 
 const AppTabBar = () => {
   const [selected, setSelected] = useState(0)

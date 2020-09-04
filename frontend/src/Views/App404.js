@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { EmptyStateCard, IconAttention } from '@aragon/ui'
-import history from '../history'
+import { history } from '../store'
 
 const Wrapper = styled.div`
   display: flex;
