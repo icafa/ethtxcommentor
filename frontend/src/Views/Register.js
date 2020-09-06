@@ -27,7 +27,6 @@ const RegisterPage = ({registerUser}) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const onSubmit = () => {
-        console.log("onSubmit")
         registerUser({
             email,
             password
@@ -36,26 +35,28 @@ const RegisterPage = ({registerUser}) => {
     return (
         <Wrapper>
             <div>
-                <TextInput
-                    wide
-                    type="email"
-                    placeholder="Enter your email"
-                    onChange={e => setEmail(e.target.value)}
-                />
-                <TextInput
-                    wide
-                    type="password"
-                    placeholder="Enter your password"
-                    onChange={e => setPassword(e.target.value)}
-                />
-                <Button
-                    wide
-                    mode="strong"
-                    onClick={() => onSubmit()}
-                >
-                    Sign Up
-                </Button>
-                <StyledLink to="/login">go to login page</StyledLink>
+                <form>
+                    <TextInput
+                        wide
+                        type="email"
+                        placeholder="Enter your email"
+                        onChange={e => setEmail(e.target.value)}
+                    />
+                    <TextInput
+                        wide
+                        type="password"
+                        placeholder="Enter your password"
+                        onChange={e => setPassword(e.target.value)}
+                    />
+                    <Button
+                        wide
+                        mode="strong"
+                        onClick={() => onSubmit()}
+                    >
+                        Sign Up
+                    </Button>
+                    <StyledLink to="/login">go to login page</StyledLink>
+                </form>
             </div>
         </Wrapper>
     )

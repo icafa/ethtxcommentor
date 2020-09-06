@@ -46,7 +46,6 @@ const CommentsCard = ({ transactInfo, commentsByHash, commentsLoading, getCommen
   }, [commentsByHash[txHash], commentsLoading[txHash]])
 
   const onSubmit = (data) => {
-    console.log(data)
     addComment({
       ...data,
       hash: txHash,

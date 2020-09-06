@@ -1,5 +1,6 @@
 export const actions = {
   USERS: {
+    LOGOUT: 'USER_LOGOUT',
     REGISTER: 'USER_REGISTER',
     REGISTER_SUCCESS: 'USER_REGISTER_SUCCESS',
     REGISTER_FAILURE: 'USER_REGISTER_FAILURE',
@@ -55,3 +56,9 @@ export const getUsersFailure = error => ({
   type: actions.USERS.FAILURE,
   error
 })
+
+export const logoutUser = () => {
+  return {
+    type: actions.USERS.LOGOUT,
+  }
+}

@@ -87,14 +87,12 @@ const Transactions = () => {
             }
           } else {
             newTransactions = [...transactions]
-            console.log("startBlockNumber, prevStartBlockNumber", startBlockNumber, prevStartBlockNumber)
             if (startBlockNumber < prevStartBlockNumber) {
               for (let id = prevStartBlockNumber - 1; id >= startBlockNumber; id --) {
                 const fetchedTransactions = await fetchSingleBlock(id)
                 newTransactions = newTransactions.concat(...fetchedTransactions)
               }
             }
-            console.log("lastBlockNumber, prevLastBlockNumber", lastBlockNumber, prevLastBlockNumber)
             if (lastBlockNumber > prevLastBlockNumber) {
               for (let id = prevLastBlockNumber + 1; id <= lastBlockNumber; id ++) {
                 const fetchedTransactions = await fetchSingleBlock(id)
@@ -102,7 +100,6 @@ const Transactions = () => {
               }
             }
           }
-          console.log("newTransactions", newTransactions.length)
           if (transactions.length !== newTransactions.length) {
             setTransactions(newTransactions)
           }
