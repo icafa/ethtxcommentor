@@ -46,9 +46,6 @@ const Transactions = () => {
   const [startBlockNumber, setStartBlockNumber] = useState(null)
   const subscriptionRef = useRef()
 
-  // TODO should fetch latest block at time interval
-  // TODO should fetch transactions for block window change event
-
   function usePrevious(value) {
     const ref = useRef();
     useEffect(() => {
@@ -60,7 +57,7 @@ const Transactions = () => {
   const prevStartBlockNumber = usePrevious(startBlockNumber)
   const prevLastBlockNumber = usePrevious(lastBlockNumber)
   
-
+  // TODO should move web3 related part to redux saga
   const fetchRequestedBlocks = useCallback(async () => {
     if (lastBlockNumber) {
       try {
@@ -172,7 +169,6 @@ const Transactions = () => {
   }, [lastBlockNumber])
 
   useEffect(() => {
-    console.log("fetch requested blocks")
     fetchRequestedBlocks()
   }, [lastBlockNumber, startBlockNumber, fetchRequestedBlocks])
 
