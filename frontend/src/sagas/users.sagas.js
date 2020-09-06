@@ -25,6 +25,7 @@ function *registerUserSaga (action) {
     console.log("registerUser start", action.payload)
     const data = yield call(agent.requests.post, MAIN_API_ROOT, '/v1/auth/register', action.payload)
     console.log('registerUser response', data)
+    agent.setToken(data.token.accessToken)
     yield put(registerUserSuccess(data))
   } catch (error) {
     console.log('registerUser failure', error)
@@ -37,6 +38,7 @@ function *loginUserSaga (action) {
     console.log("loginUser start", action.payload)
     const data = yield call(agent.requests.post, MAIN_API_ROOT, '/v1/auth/login', action.payload)
     console.log('loginUser response', data)
+    agent.setToken(data.token.accessToken)
     yield put(loginUserSuccess(data))
   } catch (error) {
     console.log('loginUser failure', error)

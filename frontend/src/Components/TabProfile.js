@@ -6,7 +6,7 @@ const AppTabProfile = ({ me }) => {
   if (me) {
     return (
       <div>
-          {me.username}
+          {me.user.email}
       </div>
     )
   }

@@ -1,7 +1,8 @@
 import { actions as usersActions } from '../actions/users.actions'
 
+const myInfo = localStorage.getItem("myInfo")
 const initialState = {
-  me: null,
+  me: myInfo? JSON.parse(myInfo) : null,
   users:null
 }
 
@@ -13,6 +14,7 @@ const rootReducer = (state = initialState , action) => {
         users:action.users
       }
     case usersActions.USERS.REGISTER_SUCCESS:
+      localStorage.setItem("myInfo", JSON.stringify(action.payload))
       return {
         ...state,
         me: action.payload,

@@ -7,7 +7,7 @@ export const MAIN_API_ROOT = "http://localhost:5000"
 const responseBody = res => res.body
 const responseFile = res => res
 
-let token = null
+let token = localStorage.getItem("accessToken") || null
 const tokenPlugin = req => {
   if (token) {
     req.set('authorization', `Bearer ${token}`)
@@ -46,6 +46,7 @@ const requests = {
 export default {
   requests,
   setToken: _token => {
+    localStorage.setItem("accessToken", _token)
     token = _token
   }
 }
