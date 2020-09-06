@@ -10,14 +10,15 @@ import {
 function *getCommentsSaga () {
   try {
     const data = yield call(agent.requests.get(MAIN_API_ROOT, '/comments'))
+    console.log('comment response', data)
     yield put(getCommentsSuccess(data))
   } catch (error) {
     yield put(getCommentsFailure(error))
   }
 }
 
-export default function* usersSagas () {
+export default function* commentsSagas () {
   yield all([
-    takeEvery(commentsActions.USERS.GET, getCommentsSaga)
+    takeEvery(commentsActions.COMMENTS.GET, getCommentsSaga)
   ])
 }

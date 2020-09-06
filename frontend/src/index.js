@@ -5,6 +5,7 @@ import { AppBar, Main, AppView, Button } from '@aragon/ui'
 import { Router } from 'react-router-dom'
 import App from './App'
 import TabBar from './Components/TabBar'
+import TabProfile from './Components/TabProfile'
 import { store, history } from './store'
 import GlobalErrorBoundary from './Components/GlobalErrorBoundary'
 
@@ -18,15 +19,7 @@ const AragonProvider = ({ children }) => (
             <AppBar
               title="Social transactions"
               tabs={<TabBar />}
-              endContent={
-                <Button.Anchor
-                  mode="strong"
-                  target="_blank"
-                  href="https://github.com/junkai121/social-transactions"
-                >
-                  See the code
-                </Button.Anchor>
-              }
+              endContent={<TabProfile />}
             />
           }
         >

@@ -7,6 +7,8 @@ import BlockInfo from './Views/BlockInfo'
 import Transactions from './Views/Transactions'
 import TransactionInfo from './Views/TransactionInfo'
 import TransactionInfinite from './Views/TransactionInfinite'
+import Login from './Views/Login'
+import Register from './Views/Register'
 import App404 from './Views/App404'
 
 const App = () => {
@@ -27,6 +29,8 @@ const App = () => {
       key={key}
     >
       <Switch location={item}>
+        <Route exact component={Login} path="/login" />
+        <Route exact component={Register} path="/register" />
         <Route exact component={BlockInfo} path="/blockinfo/:id" />
         <Route exact component={TransactionInfo} path="/transaction/:hash" />
         <Route exact component={Transactions} path="/transactions/:id" />
