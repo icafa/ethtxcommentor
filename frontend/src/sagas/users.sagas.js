@@ -13,7 +13,7 @@ import {
 
 function *getUsersSaga () {
   try {
-    const data = yield call(agent.requests.get(MAIN_API_ROOT, '/users'))
+    const data = yield call(agent.requests.get, MAIN_API_ROOT, '/users')
     yield put(getUsersSuccess(data))
   } catch (error) {
     yield put(getUsersFailure(error))
@@ -23,7 +23,7 @@ function *getUsersSaga () {
 function *registerUserSaga (action) {
   try {
     console.log("registerUser start", action.payload)
-    const data = yield call(agent.requests.post(MAIN_API_ROOT, '/v1/auth/register', action.payload))
+    const data = yield call(agent.requests.post, MAIN_API_ROOT, '/v1/auth/register', action.payload)
     console.log('registerUser response', data)
     yield put(registerUserSuccess(data))
   } catch (error) {
@@ -35,7 +35,7 @@ function *registerUserSaga (action) {
 function *loginUserSaga (action) {
   try {
     console.log("loginUser start", action.payload)
-    const data = yield call(agent.requests.post(MAIN_API_ROOT, '/v1/auth/login', action.payload))
+    const data = yield call(agent.requests.post, MAIN_API_ROOT, '/v1/auth/login', action.payload)
     console.log('loginUser response', data)
     yield put(loginUserSuccess(data))
   } catch (error) {
