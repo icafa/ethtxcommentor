@@ -1,20 +1,45 @@
 import { actions as commentsActions } from '../actions/comments.actions'
 
 const initialState = {
-  commentsByHash: {}
+  commentsByHash: {},
+  commentsLoading: {},
 }
 
 const rootReducer = (state = initialState , action) => {
   switch (action.type) {
+    case commentsActions.COMMENTS.GET:
+      return {
+        ...state,
+        commentsLoading: {
+          ...state.commentsLoading,
+          [action.payload.hash]: true
+        }
+      }
     case commentsActions.COMMENTS.SUCCESS:
       return {
         ...state,
         commentsByHash: {
             ...state.commentsByHash,
-            ...action.payload
+            [action.payload.hash]: action.payload.data
+        },
+        commentsLoading: {
+          ...state.commentsLoading,
+          [action.payload.hash]: false
         }
       }
-    case commentsActions.COMMENTS.ADD:
+    case commentsActions.COMMENTS.FAILURE:
+      return {
+        ...state,
+        commentsByHash: {
+            ...state.commentsByHash,
+            [action.payload.hash]: []
+        },
+        commentsLoading: {
+          ...state.commentsLoading,
+          [action.payload.hash]: false
+        }
+      }
+    case commentsActions.COMMENTS.ADD_SUCCESS:
       return {
         ...state,
         commentsByHash: {

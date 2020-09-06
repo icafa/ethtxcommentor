@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { getComments, addComments } from '../actions/comments.actions'
+import { getComments, addComment } from '../actions/comments.actions'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { useForm } from 'react-hook-form'
@@ -33,24 +33,22 @@ const CardContent = styled.div`
 `
 
 
-const CommentsCard = ({ transactInfo, commentsByHash, getComments, addComments }) => {
+const CommentsCard = ({ transactInfo, commentsByHash, commentsLoading, getComments, addComment }) => {
   const { register, handleSubmit, errors, setValue} = useForm()
 
   let txHash = transactInfo.hash
   let comments = commentsByHash[txHash] || []
 
   useEffect(() => {
-    if(!comments) {
+    if(!commentsByHash[txHash] && !commentsLoading[txHash]) {
       getComments(transactInfo.hash)
     }
-  })
+  }, [commentsByHash[txHash], commentsLoading[txHash]])
 
   const onSubmit = (data) => {
     console.log(data)
-    addComments({
+    addComment({
       ...data,
-      username: "Dev3",
-      avatar: TransactionPNG,
       hash: txHash,
     })
     setValue("text", "")
@@ -82,7 +80,7 @@ const CommentsCard = ({ transactInfo, commentsByHash, getComments, addComments }
             <div key={index} className="block-stats">
               <div className="stat">
                 <img
-                  src={comment.avatar}
+                  src={comment.avatar || TransactionPNG}
                   alt="Hands with coins floating"
                   width="32px"
                   height="32px"
@@ -119,12 +117,13 @@ CommentsCard.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  commentsByHash: state.commentsReducer.commentsByHash
+  commentsByHash: state.commentsReducer.commentsByHash,
+  commentsLoading: state.commentsReducer.commentsLoading,
 })
 
 const mapDispatchToProps = dispatch => ({
   getComments: (payload) => dispatch(getComments(payload)),
-  addComments: (payload) => dispatch(addComments(payload))
+  addComment: (payload) => dispatch(addComment(payload))
 })
 
 export default connect(

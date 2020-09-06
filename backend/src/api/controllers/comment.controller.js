@@ -7,12 +7,14 @@ const Comment = require('../models/comment.model');
  */
 exports.create = async (req, res, next) => {
   try {
+    const reqBody = req.body;
+    reqBody.username = req.user.email.split('@')[0];
     const comment = new Comment(req.body);
     const savedComment = await comment.save();
     res.status(httpStatus.CREATED);
     res.json(savedComment);
   } catch (error) {
-    next(Comment.checkDuplicateEmail(error));
+    next(error);
   }
 };
 

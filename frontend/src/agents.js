@@ -10,7 +10,7 @@ const responseFile = res => res
 let token = localStorage.getItem("accessToken") || null
 const tokenPlugin = req => {
   if (token) {
-    req.set('authorization', `Bearer ${token}`)
+    req.set('Authorization', `Bearer ${token}`)
   }
 }
 

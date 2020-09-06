@@ -5,8 +5,7 @@ const { omitBy, isNil } = require('lodash');
  * Comment Schema
  * @private
  */
-const commentSchema = new mongoose.Schema({
-  txHash: {
+const commentSchema = new mongoose.Schema({  hash: {
     type: String,
     maxlength: 128,
     index: true,
@@ -19,8 +18,8 @@ const commentSchema = new mongoose.Schema({
     trim: true,
   },
   text: {
-    facebook: String,
-    google: String,
+    type: String,
+    maxlength: 128,
   }
 }, {
   timestamps: true,
@@ -39,9 +38,9 @@ commentSchema.statics = {
    * @returns {Promise<Comment[]>}
    */
   list({
-    page = 1, perPage = 30, txHash,
+    page = 1, perPage = 30, hash,
   }) {
-    const options = omitBy({ txHash }, isNil);
+    const options = omitBy({ hash }, isNil);
 
     return this.find(options)
       .sort({ createdAt: -1 })
