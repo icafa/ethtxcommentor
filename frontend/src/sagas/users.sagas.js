@@ -20,26 +20,26 @@ function *getUsersSaga () {
   }
 }
 
-function *registerUserSaga (payload) {
+function *registerUserSaga (action) {
   try {
-    console.log("registerUser start", payload)
-    const data = yield call(agent.requests.post(MAIN_API_ROOT, '/v1/auth/register', payload))
+    console.log("registerUser start", action.payload)
+    const data = yield call(agent.requests.post(MAIN_API_ROOT, '/v1/auth/register', action.payload))
     console.log('registerUser response', data)
     yield put(registerUserSuccess(data))
   } catch (error) {
-    console.log('registerUser failure', data)
+    console.log('registerUser failure', error)
     yield put(registerUserFailure(error))
   }
 }
 
-function *loginUserSaga (payload) {
+function *loginUserSaga (action) {
   try {
-    console.log("loginUser start", payload)
-    const data = yield call(agent.requests.get(MAIN_API_ROOT, '/v1/auth/login', payload))
+    console.log("loginUser start", action.payload)
+    const data = yield call(agent.requests.post(MAIN_API_ROOT, '/v1/auth/login', action.payload))
     console.log('loginUser response', data)
     yield put(loginUserSuccess(data))
   } catch (error) {
-    console.log('loginUser failure', data)
+    console.log('loginUser failure', error)
     yield put(loginUserFailure(error))
   }
 }

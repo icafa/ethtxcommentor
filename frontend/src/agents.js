@@ -2,7 +2,7 @@ import superagentPromise from 'superagent-promise'
 import _superagent from 'superagent'
 
 const superagent = superagentPromise(_superagent, global.Promise)
-export const MAIN_API_ROOT = "https://localhost:5000"
+export const MAIN_API_ROOT = "http://localhost:5000"
 
 const responseBody = res => res.body
 const responseFile = res => res
