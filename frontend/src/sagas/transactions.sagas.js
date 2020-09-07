@@ -1,5 +1,4 @@
 import { all, call, put, takeEvery } from 'redux-saga/effects'
-import agent, { MAIN_API_ROOT } from '../agents'
 
 import {
   actions as transactionActions,
@@ -45,9 +44,7 @@ function *getTransactionsSaga (action) {
           }
         }
       }
-      if (transactions.length !== newTransactions.length) {
-        yield put(getTransactionsSuccess(newTransactions))
-      }
+      yield put(getTransactionsSuccess(newTransactions))
   } catch (error) {
     yield put(getTransactionsFailure(error))
   }

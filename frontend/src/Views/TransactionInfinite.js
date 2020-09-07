@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react'
 import styled from 'styled-components'
+import { connect } from 'react-redux'
 import 'styled-components/macro'
 import {
   Text,
@@ -20,6 +21,7 @@ import TagLink from '../Components/TagLink'
 import Spinner, { SpinnerWrapper } from '../Components/Spinner'
 import { GU, toEther } from '../utils/utils'
 import { getInjectedProvider } from '../utils/web3-utils'
+import { getTransactions } from '../actions/transactions.actions'
 
 const AddressWrapper = styled.div`
   width: 100%;
@@ -36,10 +38,8 @@ const AddressWrapper = styled.div`
 const defaultBlockHeightWindow = 1;
 const defaultLoadMoreBlocks = 1;
 
-const Transactions = () => {
-  const [loading, setLoading] = useState(true)
+const Transactions = ({ getTransactions, transactions, loading }) => {
   const [failed, setFailed] = useState(false)
-  const [transactions, setTransactions] = useState([])
   const { above, breakpoints } = useViewport()
 
   const [lastBlockNumber, setLastBlockNumber] = useState(null)
@@ -57,65 +57,19 @@ const Transactions = () => {
   const prevStartBlockNumber = usePrevious(startBlockNumber)
   const prevLastBlockNumber = usePrevious(lastBlockNumber)
   
-  // TODO should move web3 related part to redux saga
   const fetchRequestedBlocks = useCallback(async () => {
-    if (lastBlockNumber) {
+    if (lastBlockNumber && (prevStartBlockNumber != startBlockNumber || prevLastBlockNumber != lastBlockNumber)) {
       try {
-        setLoading(true)
-        setFailed(false)
-        try {
-          const web3 = new Web3(
-            getInjectedProvider() || process.env.REACT_APP_INFURA_WS_ENDPOINT
-          )
-          const fetchSingleBlock = async (id) => {
-            let block = await web3.eth.getBlock(id, true)
-            const { transactions } = block
-            // Filter only ethereum transfers
-            const fetchedTransactions = transactions.filter(
-                transaction => transaction.value > 0 && transaction.to !== null
-            )
-            return fetchedTransactions
-          }
-          let newTransactions = []
-          if (!prevStartBlockNumber || !prevLastBlockNumber) {
-            for (let id = lastBlockNumber; id >= startBlockNumber; id --) {
-              const fetchedTransactions = await fetchSingleBlock(id)
-              newTransactions = newTransactions.concat(...fetchedTransactions)
-            }
-          } else {
-            newTransactions = [...transactions]
-            if (startBlockNumber < prevStartBlockNumber) {
-              for (let id = prevStartBlockNumber - 1; id >= startBlockNumber; id --) {
-                const fetchedTransactions = await fetchSingleBlock(id)
-                newTransactions = newTransactions.concat(...fetchedTransactions)
-              }
-            }
-            if (lastBlockNumber > prevLastBlockNumber) {
-              for (let id = prevLastBlockNumber + 1; id <= lastBlockNumber; id ++) {
-                const fetchedTransactions = await fetchSingleBlock(id)
-                newTransactions = fetchedTransactions.concat(...newTransactions)
-              }
-            }
-          }
-          if (transactions.length !== newTransactions.length) {
-            setTransactions(newTransactions)
-          }
-        } catch (error) {
-          setFailed(true)
-        }
-        setLoading(false)
-        setFailed(false)
+        getTransactions({prevStartBlockNumber, prevLastBlockNumber, lastBlockNumber, startBlockNumber, transactions})
       } catch (error) {
-        setFailed(true)
+        console.error(error)
       }
-      setLoading(false)
     }
   }, [lastBlockNumber, startBlockNumber, prevLastBlockNumber, prevStartBlockNumber, transactions])
 
   // Fetch the last block number on the blockchain.
   // note that this may be unstable due to issues with web3.
   const fetchBlockNumber = useCallback(async () => {
-    setLoading(true)
     try {
       const web3 = new Web3(
         getInjectedProvider() || process.env.REACT_APP_INFURA_WS_ENDPOINT
@@ -125,9 +79,8 @@ const Transactions = () => {
       setLastBlockNumber(blockNumber)
       setStartBlockNumber(blockNumber - defaultBlockHeightWindow + 1)
     } catch (error) {
-      setFailed(true)
+      console.error(error)
     }
-    setLoading(false)
   }, [])
 
   useEffect(() => {
@@ -278,7 +231,6 @@ const Transactions = () => {
               wide
               mode="strong"
               onClick={() => {
-                console.log("loadMore")
                 setStartBlockNumber(startBlockNumber - defaultLoadMoreBlocks)
               }}
               css={`
@@ -295,4 +247,16 @@ const Transactions = () => {
 
   return renderTransactions()
 }
-export default Transactions
+const mapStateToProps = state => ({
+  transactions: state.transactionsReducer.transactions,
+  loading: state.transactionsReducer.loading,
+})
+
+const mapDispatchToProps = dispatch => ({
+  getTransactions: (payload) => dispatch(getTransactions(payload)),
+})
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Transactions)
