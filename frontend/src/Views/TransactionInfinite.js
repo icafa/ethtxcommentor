@@ -143,104 +143,117 @@ const Transactions = ({ getTransactions, transactions, loading }) => {
       <div>
         <div
           css={`
-            margin-bottom: ${GU * 2}px;
+            position: absolute;
+            background: #F7FBFD;
+            z-index: 1;
+            width: 100%;
+            border: solid 1px #E6E6E6;
+            border-radius: 3px;
           `}
         >
           <Text size="xlarge">
             {`Transactions from block ${startBlockNumber} - latest(${lastBlockNumber})`}
           </Text>
         </div>
-        <Table header={
-          <TableRow>
-            <TableHeader title="Transaction Hash" />
-            {above(360) && <TableHeader title="From / To" />}
-            {above(breakpoints.small) && <TableHeader title="Value in Eth" />}
-          </TableRow>}
-        >
-        {
-          transactions.map(transaction => (
-            <TableRow key={transaction.hash}>
-              <TableCell>
-                <TagLink
-                  shorten
-                  text={transaction.hash}
-                  location={`/transaction/${transaction.hash}`}
-                />
-              </TableCell>
-              {above(360) && (
+        <div
+          css={`
+            position: absolute;
+            padding-top: 46px;
+            width: 100%;
+            height: calc(100vh - 135px);
+            overflow-y: auto;
+          `}>
+          <Table header={
+            <TableRow>
+              <TableHeader title="Transaction Hash" />
+              {above(360) && <TableHeader title="From / To" />}
+              {above(breakpoints.small) && <TableHeader title="Value in Eth" />}
+            </TableRow>}
+          >
+          {
+            transactions.map(transaction => (
+              <TableRow key={transaction.hash}>
                 <TableCell>
-                  <AddressWrapper>
-                    <div className="trans-details">
-                      <Text
-                        smallcaps
-                        color={theme.textSecondary}
-                        weight="bold"
-                        css={`
-                          margin-right: ${GU / 2}px;
-                        `}
-                      >
-                        From
-                      </Text>{' '}
-                      <IdentityBadge
-                        shorten
-                        entity={transaction.from}
-                        fontSize="xxsmall"
-                      />
-                    </div>
-                    <div className="trans-details">
-                      <Text
-                        smallcaps
-                        color={theme.textSecondary}
-                        weight="bold"
-                        css={`
-                          margin-right: ${GU / 2}px;
-                        `}
-                      >
-                        To
-                      </Text>{' '}
-                      <IdentityBadge
-                        shorten
-                        entity={transaction.to}
-                        fontSize="xxsmall"
-                      />
-                    </div>
-                  </AddressWrapper>
+                  <TagLink
+                    shorten
+                    text={transaction.hash}
+                    location={`/transaction/${transaction.hash}`}
+                  />
                 </TableCell>
-              )}
-              {above(breakpoints.small) && (
-                <TableCell>
-                  <Text smallcaps>
-                    $ {toEther(transaction.value).toFixed(2)}
-                  </Text>
-                </TableCell>
-              )}
-            </TableRow>
-          ))
-        }
-        </Table>
-    
-        {
-          loading? (
-            <div style={{ width: '95%' }}>
-              <SpinnerWrapper>
-                <Spinner />
-              </SpinnerWrapper>
-            </div>
-          ) : (
-            <Button
-              wide
-              mode="strong"
-              onClick={() => {
-                setStartBlockNumber(startBlockNumber - defaultLoadMoreBlocks)
-              }}
-              css={`
-                margin: ${GU}px 0 0 0;
-              `}
-            >
-              Load More
-            </Button>
-          )
-        }
+                {above(360) && (
+                  <TableCell>
+                    <AddressWrapper>
+                      <div className="trans-details">
+                        <Text
+                          smallcaps
+                          color={theme.textSecondary}
+                          weight="bold"
+                          css={`
+                            margin-right: ${GU / 2}px;
+                          `}
+                        >
+                          From
+                        </Text>{' '}
+                        <IdentityBadge
+                          shorten
+                          entity={transaction.from}
+                          fontSize="xxsmall"
+                        />
+                      </div>
+                      <div className="trans-details">
+                        <Text
+                          smallcaps
+                          color={theme.textSecondary}
+                          weight="bold"
+                          css={`
+                            margin-right: ${GU / 2}px;
+                          `}
+                        >
+                          To
+                        </Text>{' '}
+                        <IdentityBadge
+                          shorten
+                          entity={transaction.to}
+                          fontSize="xxsmall"
+                        />
+                      </div>
+                    </AddressWrapper>
+                  </TableCell>
+                )}
+                {above(breakpoints.small) && (
+                  <TableCell>
+                    <Text smallcaps>
+                      $ {toEther(transaction.value).toFixed(2)}
+                    </Text>
+                  </TableCell>
+                )}
+              </TableRow>
+            ))
+          }
+          </Table>
+          {
+            loading? (
+              <div style={{ width: '95%' }}>
+                <SpinnerWrapper>
+                  <Spinner />
+                </SpinnerWrapper>
+              </div>
+            ) : (
+              <Button
+                wide
+                mode="strong"
+                onClick={() => {
+                  setStartBlockNumber(startBlockNumber - defaultLoadMoreBlocks)
+                }}
+                css={`
+                  margin: ${GU}px 0 0 0;
+                `}
+              >
+                Load More
+              </Button>
+            )
+          }
+        </div>
       </div>
     )
   }

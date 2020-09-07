@@ -7,7 +7,32 @@ const AppTabBar = () => {
 
   function handleTabChange(index) {
     setSelected(index)
+    switch (index) {
+      case 0:
+        history.push('/')
+        break
+    }
   }
+
+  function setCorrespondingTab(path) {
+    if (path.includes('register')) {
+      setSelected(-1)
+    } else if (path.includes('login')) {
+      setSelected(-1)
+    } else {
+      setSelected(0)
+    }
+  }
+
+  useEffect(() => {
+    setCorrespondingTab(history.location.pathname)
+  }, [])
+  useEffect(() => {
+    history.listen(location => {
+      setCorrespondingTab(location.pathname)
+    })
+  }, [])
+
   return (
     <TabBar
       items={['Latest Transactions']}

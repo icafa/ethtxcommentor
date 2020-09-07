@@ -36,6 +36,7 @@ const RegisterPage = ({registerUser}) => {
         <Wrapper>
             <div>
                 <form>
+                    <div style={{fontSize: '16px', paddingBottom: '16px'}}>Register (email / password)</div>
                     <TextInput
                         wide
                         type="email"

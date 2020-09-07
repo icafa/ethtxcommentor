@@ -46,6 +46,7 @@ function *getTransactionsSaga (action) {
       }
       yield put(getTransactionsSuccess(newTransactions))
   } catch (error) {
+    console.log('getTransactions failure', error)
     yield put(getTransactionsFailure(error))
   }
 }

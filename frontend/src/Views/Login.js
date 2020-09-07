@@ -36,6 +36,7 @@ const LoginPage = ({loginUser}) => {
         <Wrapper>
             <div>
                 <form>
+                    <div style={{fontSize: '16px', paddingBottom: '16px'}}>Log In (email / password)</div>
                     <TextInput
                         wide
                         type="email"

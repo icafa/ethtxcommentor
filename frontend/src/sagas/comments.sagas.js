@@ -17,6 +17,7 @@ function *getCommentsSaga (action) {
       data,
     }))
   } catch (error) {
+    console.log('getComments failure', error)
     yield put(getCommentsFailure(error))
   }
 }
@@ -26,6 +27,8 @@ function *addCommentSaga (action) {
     const data = yield call(agent.requests.post, MAIN_API_ROOT, '/v1/comments', action.payload)
     yield put(addCommentSuccess(data))
   } catch (error) {
+    console.log('addComment failure', error)
+    alert('addComment failure' + error)
     yield put(addCommentFailure(error))
   }
 }
