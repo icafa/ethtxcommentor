@@ -2,9 +2,6 @@ import React from 'react'
 import { Route, Switch, useLocation } from 'react-router-dom'
 import { useTransition, animated } from 'react-spring'
 
-import Index from './Views/Index'
-import BlockInfo from './Views/BlockInfo'
-import Transactions from './Views/Transactions'
 import TransactionInfo from './Views/TransactionInfo'
 import TransactionInfinite from './Views/TransactionInfinite'
 import Login from './Views/Login'
@@ -31,11 +28,8 @@ const App = () => {
       <Switch location={item}>
         <Route exact component={Login} path="/login" />
         <Route exact component={Register} path="/register" />
-        <Route exact component={BlockInfo} path="/blockinfo/:id" />
         <Route exact component={TransactionInfo} path="/transaction/:hash" />
-        <Route exact component={Transactions} path="/transactions/:id" />
-        <Route exact component={TransactionInfinite} path="/latesttransactions" />
-        <Route exact component={Index} path="/" />
+        <Route exact component={TransactionInfinite} path="/" />
         <Route component={App404} />
       </Switch>
     </animated.div>
